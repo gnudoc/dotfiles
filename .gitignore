@@ -1,0 +1,11 @@
+cat_installer
+dconf/
+go/
+google-chrome/
+menus/
+mimeapps.list
+pulse/
+yay/
+*~
+*.bak
+*.save0
