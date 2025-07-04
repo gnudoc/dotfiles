@@ -50,7 +50,7 @@
         "spacing": 10
     },
     "custom/diskfree": {
-        "format": " 🖴 Disk: {} used ",
+        "format": " Disk: {} used ",
 	"interval": 300,
 	"max-length": 20,
 	"exec": "df --total -hl | grep 'nvme0n1p2' | awk '{print $5}'"
