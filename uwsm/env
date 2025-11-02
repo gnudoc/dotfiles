@@ -1,3 +1,7 @@
 export XCURSOR_SIZE=24
 export HYPRCURSOR_SIZE=24
 export ELECTRON_OZONE_PLATFORM_HINT=auto
+# So that emacs gets SSH_AUTH_SOCK
+# we do systemctl --user import-environment SSH_AUTH_SOCK
+# in hyprland.conf instead of exporting it from here
+#export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
