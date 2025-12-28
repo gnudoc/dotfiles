@@ -1,2 +1,6 @@
-
-@theme "/usr/share/rofi/themes/android_notification.rasi"
+configuration {
+  modi: "window,drun,ssh,keys,filebrowser,recursivebrowser,combi";
+  combi-modi: "window,drun,ssh,keys,filebrowser,recursivebrowser";
+  show: "combi";
+}
+@theme "/usr/share/rofi/themes/Monokai.rasi"

@@ -1,0 +1,165 @@
+    
+# ==============================================================================
+#  Sway Config (Migrated from Hyprland)
+# ==============================================================================
+
+# --- Variables ---
+# Mod4 is Super
+set $mod Mod4
+set $term emacsclient -c -e '(nij/vterm-new)' -a ""
+set $alt_term alacritty
+set $browser google-chrome-stable
+set $menu rofi -show combi -modes combi -combi-modes "window,drun,ssh"
+set $shutdown rofi -show p -modi p:rofi-power-menu
+set $fileManager emacsclient -c -e '(dired ".")' -a ""
+set $git emacsclient -c -e '(magit-status)' -a ""
+
+# --- Environment & Systemd Integration ---
+# This fixes "Apps not opening" and "Waybar not showing"
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+
+# --- Output Configuration ---
+# Sway auto-configures monitors well, but here is my dell xps 9300's:
+output eDP-1 resolution 1920x1200 position 0,0 scale 1
+
+# --- Input Configuration ---
+input type:keyboard {
+    xkb_layout gb
+    xkb_variant dvorak
+    xkb_options ctrl:swapcaps,compose:ralt
+}
+
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    natural_scroll disabled
+    middle_emulation enabled
+}
+
+# --- Visuals & Transparency ---
+# Default font
+font pango:monospace 10
+
+# Gaps
+gaps inner 2
+gaps outer 5
+
+# Borders: 'pixel 2' removes titlebars from normal windows (cleaner look)
+default_border pixel 2
+default_floating_border normal
+
+# Transparency (The only eye-candy needed)
+# 1.0 = opaque
+for_window [class=".*"] opacity 0.95
+# ensure Rofi and Chrome are opaque if you prefer
+for_window [app_id="rofi"] opacity 1.0
+for_window [app_id="google-chrome"] opacity 0.99
+
+# Colors (Approximation of a Hyprland teal/green gradient)
+# Property      Border  BG      Text    Indicator ChildBorder
+client.focused  #33ccff #33ccff #000000 #33ccff   #33ccff
+
+# --- Idle & Session ---
+exec emacs --daemon
+exec nm-applet
+exec waybar -c ~/.config/waybar/config-sway.jsonc
+exec swww-daemon
+exec ~/.config/sway/scripts/swww-random ~/.local/share/wallpapers
+
+# --- Keybindings ---
+
+# 1. Application Launchers
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+Return exec $alt_term
+bindsym $mod+b exec $browser
+bindsym $mod+d exec $fileManager
+bindsym $mod+g exec $git
+# bindsym $mod+c exec code
+bindsym $mod+r exec $menu
+bindsym $mod+s exec $shutdown
+bindsym $mod+p exec /usr/lib/packettracer/packettracer.AppImage
+
+# 2. Window Management
+bindsym $mod+q kill
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+f floating toggle
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+# Exit Sway
+bindsym $mod+m exec swaymsg exit
+
+# 3. Moving Focus (Arrow style)
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# 4. Moving Windows
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# 5. Workspaces
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# Touchpad Gestures
+# Swipe left/right with 3 fingers to switch workspaces
+bindgesture swipe:3:right workspace prev
+bindgesture swipe:3:left workspace next
+
+# --- Manual Tiling Control ---
+
+# Split Horizontal (next window opens to the right)
+bindsym $mod+h splith
+# Split Vertical (next window opens below)
+bindsym $mod+v splitv
+
+# Layout Modes
+# 'Tabbed' is amazing for fullscreen users. 
+# It puts windows in tabs (like a browser) instead of splitting the screen.
+bindsym $mod+Tab layout tabbed
+bindsym $mod+Shift+Tab layout toggle split
+
+# Waybar Control
+bindsym $mod+w exec killall -SIGUSR1 waybar
+
+# --- Multimedia & Screenshots ---
+bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindsym XF86MonBrightnessUp exec brightnessctl s 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
+
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+
+# Screenshot (Grim + Slurp)
+bindsym Print exec grim -g "$(slurp -d)"
+bindsym Shift+Print exec grim -g "$(slurp)" - | tee "$HOME/Pictures/Screenshots/$(date +'%s_grim.png')"| wl-copy
