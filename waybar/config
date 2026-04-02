@@ -1,90 +1,62 @@
+// -*- mode: json-ts -*-
 {
     "layer": "top",
     "position": "top",
     "height": 26,
     "spacing": 7,
 
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": [
+        "hyprland/workspaces",
+	"hyprland/window"
+    ],
 
     "modules-center": [
-        "temperature",
-        "wireplumber",
-        "backlight",
-        "battery",
     ],
 
     "modules-right": [
-        "bluetooth",
-        "network",
-        "tray",
-        "clock",
+        "wireplumber",
+	"custom/sep",
+        "backlight",
+	"custom/sep",
+        "battery",
+	"custom/sep",
+        "tray"
     ],
 
     "hyprland/workspaces": {
-        "format": "<span size='larger'>{icon}</span>",
+        "format": "{name}",
         "on-click": "activate",
-        "format-icons": {
-            "active": "\uf444",
-            "default": "\uf4c3"
-        },
-        "icon-size": 10,
-        "sort-by-number": true,
+	"all-outputs": true,
         "persistent-workspaces": {
-            "1": [],
-            "2": [],
-            "3": [],
-            "4": [],
-            "5": [],
+            "*": 9
         }
     },
-
-    "clock": {
-        "format": "{:%A %d %B  -  %H:%M  }"
+    "hyprland/window": {
+        "max-length": 40,
+	"separate-outputs": false
     },
-
     "wireplumber": {
-        "format": "\udb81\udd7e  {volume}%",
+        "format": "\udb81\udd7e {volume}%",
         "max-volume": 100,
         "scroll-step": 5
     },
-
     "battery": {
         "bat": "BAT0",
         "interval": 60,
-        "format": "{icon}  {capacity}%",
+        "format": "{icon} {capacity}%",
         "format-icons": ["\uf244", "\uf243", "\uf242", "\uf241", "\uf240"],
     },
 
     "backlight": {
-        "format": "\udb80\udcdf  {percent}%"
+        "format": "\udb80\udcdf {percent}%"
     },
-
-    "temperature": {
-        "format": "  {temperatureC}°C"
-    },
-
-    "network": {
-        "format": "",
-        "format-ethernet": "\udb83\udc9d",
-        "format-wifi": "{icon}",
-        "format-disconnected": "\udb83\udc9c",
-        "format-icons": ["\udb82\udd2f", "\udb82\udd1f", "\udb82\udd22", "\udb82\udd25", "\udb82\udd28"],
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) - {ipaddr}",
-        "tooltip-format-ethernet": "{ifname}",
-        "tooltip-format-disconnected": "Disconnected",
-    },
-
-    "bluetooth": {
-        "format": "\udb80\udcaf",
-        "format-disabled": "\udb80\udcb2",
-        "format-connected": "\udb80\udcb1",
-        "tooltip-format": "{controller_alias} - {controller_address}",
-        "tooltip-format-connected": "{controller_alias} - {controller_address}\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias} - {device_address}",
-    },
-
     "tray": {
-        "icon-size": 16,
-        "spacing": 16
+        "icon-size": 14,
+        "spacing": 10
+    },
+    "custom/sep": {
+        "format": "|",
+	"interval": 0,
+	"tooltip": false
     }
 }

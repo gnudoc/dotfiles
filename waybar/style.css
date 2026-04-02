@@ -1,43 +1,87 @@
-@define-color foreground #eeeeee;
-@define-color foreground-inactive #aaaaaa;
-@define-color background #000000;
+@define-color bg    #1a1b26;
+@define-color fg    #a9b1d6;
+@define-color blk   #32344a;
+@define-color red   #f7768e;
+@define-color grn   #9ece6a;
+@define-color ylw   #e0af68;
+@define-color blu   #7aa2f7;
+@define-color mag   #ad8ee6;
+@define-color cyn   #0db9d7;
+@define-color brblk #444b6a;
+@define-color wht   #ffffff;
 
 * {
-    font-family: "FiraCode Nerd Font Mono";
+    font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 16px;
+    font-weight: bold;
     padding: 0;
     margin: 0;
 }
 
 #waybar {
-    color: @foreground;
-    background-color: @background;
+    color: @fg;
+    background-color: @bg;
 }
 
 #workspaces button {
-    color: @foreground;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    color: @cyn;
+    padding: 0 3px;
+    background: transparent;
+    border-bottom: 3px solid @bg;
 }
-
+#workspaces button.active {
+    color: @cyn;
+    border-bottom: 3px solid @mag;
+}
 #workspaces button.empty {
-    color: @foreground-inactive;
+    color: @wht;
+}
+#workspaces button.empty.active {
+    color: @cyn;
+    border-bottom: 3px solid @mag;
 }
 
 
-#memory,
-#temperature,
 #wireplumber,
 #battery,
 #backlight,
-#language,
-#network,
-#bluetooth,
 #tray {
-    padding-right: 0.5em;
-    padding-left: 0.5em;
+    padding: 0 2px;
+    color: @wht;
 }
 
-/* Local Variables: */
-/* eval: (if config-module-managed-dotfiles (add-hook 'after-save-hook 'chezmoi-write nil t)) */
-/* End: */
+#wireplumber {
+    color: @cyn;
+    border-bottom: 3px solid @cyn;
+}
+
+#battery {
+    color: @mag;
+    border-bottom: 3px solid @mag;
+}
+
+#backlight {
+    color: @grn;
+    border-bottom: 3px solid @grn;
+}
+
+#custom-backup {
+    color: @blu;
+    padding: 0 5px;
+    border-bottom: 3px solid @blu;
+}
+
+#custom-backup.good {
+    color: @grn;
+    border-bottom-color: @grn;
+}
+
+#custom-backup.warning {
+    color: @ylw;
+    border-bottom-color: @ylw;
+}
+
+#custom-backup.critical {
+    color: @red;
+    border-bottom-color: @red;
+}

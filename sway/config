@@ -1,29 +1,48 @@
-    
-# ==============================================================================
-#  Sway Config (Migrated from Hyprland)
-# ==============================================================================
+
+# --- Output Configuration ---
+# Sway auto-configures monitors well, but here is my dell xps 9300's:
+output eDP-1 resolution 1920x1200 position 0,0 scale 1
 
 # --- Variables ---
 # Mod4 is Super
 set $mod Mod4
 set $term emacsclient -c -e '(nij/vterm-new)' -a ""
-set $alt_term alacritty
-set $browser google-chrome-stable
+set $alt_term footclient
+set $browser chromium
 set $menu rofi -show combi -modes combi -combi-modes "window,drun,ssh"
 set $shutdown rofi -show p -modi p:rofi-power-menu
-set $fileManager emacsclient -c -e '(dired ".")' -a ""
+set $fileManager emacsclient -c -e "(call-interactively 'dired)" -a ""
 set $git emacsclient -c -e '(magit-status)' -a ""
+set $editor emacsclient -c -a ""
 
 # --- Environment & Systemd Integration ---
 # This fixes "Apps not opening" and "Waybar not showing"
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP SSH_AUTH_SOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP SSH_AUTH_SOCK
 
+# --- Idle & Session ---
+exec emacs --daemon
+exec foot --server
+exec nm-applet
+exec waybar -c ~/.config/waybar/config-sway.jsonc
+exec swww-daemon
+exec ~/.config/sway/scripts/swww-random ~/.local/share/wallpapers
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+exec swayidle -w \
+    timeout 300 'swaylock -f -c 1a1b26' \
+    timeout 330 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -f -c 1a1b26'
 
-# --- Output Configuration ---
-# Sway auto-configures monitors well, but here is my dell xps 9300's:
-output eDP-1 resolution 1920x1200 position 0,0 scale 1
+# --- Manual Lock Keybinding ---
+bindsym $mod+Escape exec swaylock -f -c 1a1b26
+
+# --- Laptop Lid Management ---
+# Disables the eDP-1 display when closed, re-enables when opened.
+# Not needed unless docked to an external monitor, as 
+# systemd handles the laptop hardware switch off/on
+# bindswitch lid:on output eDP-1 disable
+# bindswitch lid:off output eDP-1 enable
 
 # --- Input Configuration ---
 input type:keyboard {
@@ -54,20 +73,14 @@ default_floating_border normal
 # Transparency (The only eye-candy needed)
 # 1.0 = opaque
 for_window [class=".*"] opacity 0.95
+for_window [app_id=".*"] opacity 0.95
 # ensure Rofi and Chrome are opaque if you prefer
 for_window [app_id="rofi"] opacity 1.0
-for_window [app_id="google-chrome"] opacity 0.99
+for_window [app_id="chromium"] opacity 0.99
 
 # Colors (Approximation of a Hyprland teal/green gradient)
 # Property      Border  BG      Text    Indicator ChildBorder
 client.focused  #33ccff #33ccff #000000 #33ccff   #33ccff
-
-# --- Idle & Session ---
-exec emacs --daemon
-exec nm-applet
-exec waybar -c ~/.config/waybar/config-sway.jsonc
-exec swww-daemon
-exec ~/.config/sway/scripts/swww-random ~/.local/share/wallpapers
 
 # --- Keybindings ---
 
@@ -77,6 +90,7 @@ bindsym $mod+Shift+Return exec $alt_term
 bindsym $mod+b exec $browser
 bindsym $mod+d exec $fileManager
 bindsym $mod+g exec $git
+bindsym $mod+e exec $editor
 # bindsym $mod+c exec code
 bindsym $mod+r exec $menu
 bindsym $mod+s exec $shutdown

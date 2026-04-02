@@ -1,0 +1,3 @@
+[binds]
+<Shift+X> = exec rm "$imv_current_file"; close
+<Shift+K> = exec dir=$(dirname "$imv_current_file") && mkdir -p "$dir/Keepers/" && mv -v $imv_current_file "$dir/Keepers/"
