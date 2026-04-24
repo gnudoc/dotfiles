@@ -1,0 +1,33 @@
+# --- custom scripts that don't live in ~ ---
+/usr/local/bin/
+
+# --- Boot & Kernel ---
+/boot/loader/loader.conf
+/boot/loader/entries/arch.conf
+/boot/loader/entries/arch-fallback.conf
+/etc/mkinitcpio.conf
+/etc/fstab
+
+# --- Package Management ---
+/etc/pacman.conf
+
+# --- System Identity & Localization ---
+/etc/hostname
+/etc/hosts
+/etc/locale.gen
+/etc/vconsole.conf
+
+# --- Networking & Hardware ---
+/etc/udev/rules.d/
+
+# --- Inaccessible but needed ---
+# these are root read-only, put them in /usr/local/bin/laptop-backup-prepare.sh
+#/etc/sudoers.d <--- the laptop-backup.service relies on sudo'ing the script above
+#/etc/NetworkManager/system-connections/
+#/var/lib/bluetooth/
+
+
+# --- Custom Services & UI (Uncomment if needed) ---
+#/etc/X11/xorg.conf.d/
+#/etc/systemd/system/laptop-backup.service
+#/etc/systemd/system/laptop-backup.timer

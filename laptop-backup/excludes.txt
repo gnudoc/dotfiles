@@ -1,0 +1,64 @@
+# --- Security & Shell ---
+.authinfo
+.bash_history
+
+# --- General Caches & Trash ---
+.cache/
+.Trash/
+.local/share/Trash/
+tmp/
+Downloads/not-for-backup/
+
+# --- Virtualization & Containers ---
+ISO/
+quickemu/
+VMs/
+Projects/quickemu/
+.local/share/containers/
+
+# --- Developer Caches & Build Outputs ---
+.cargo/registry/
+.npm/
+node_modules/
+__pycache__/
+target/
+/.cabal/
+/.ghcup/
+build/
+dist/
+/yay/
+
+# --- IDEs & Editors ---
+.config/Code/
+.vscode/extensions/
+
+# --- Browsers & Electron App Caches ---
+.config/google-chrome/
+.config/vivaldi/
+.config/chromium/
+.config/chromium-proxied/
+.mozilla/firefox/
+.config/discord/Cache/
+.config/Slack/Cache/
+
+# --- Media & Desktop ---
+.local/wallpapers/
+.local/share/wallpapers/
+.local/share/baloo/
+
+# --- Specific Project/Work Exclusions ---
+Projects/tor/
+Projects/win/
+Projects/pkgs/
+Public/m269/collabnotes/
+Public/m269/cn/
+Public/m269/newcn/
+Public/m269/old-collabnotes/
+pdfs-from-girion/
+
+# --- Gaming Exclusions (Uncomment if needed) ---
+#.local/share/Steam/steamapps/common/
+#.local/share/Steam/steamapps/shadercache/
+
+# --- Dotfiles Git Repo (ignores ~/.git/ but backs up ~/Projects/*/.git/) ---
+/.git/
