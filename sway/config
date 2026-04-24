@@ -26,7 +26,7 @@ exec emacs --daemon
 exec foot --server
 exec nm-applet
 exec waybar -c ~/.config/waybar/config-sway.jsonc
-exec swww-daemon
+exec awww-daemon
 exec ~/.config/sway/scripts/swww-random ~/.local/share/wallpapers
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec swayidle -w \
@@ -36,13 +36,6 @@ exec swayidle -w \
 
 # --- Manual Lock Keybinding ---
 bindsym $mod+Escape exec swaylock -f -c 1a1b26
-
-# --- Laptop Lid Management ---
-# Disables the eDP-1 display when closed, re-enables when opened.
-# Not needed unless docked to an external monitor, as 
-# systemd handles the laptop hardware switch off/on
-# bindswitch lid:on output eDP-1 disable
-# bindswitch lid:off output eDP-1 enable
 
 # --- Input Configuration ---
 input type:keyboard {
@@ -91,7 +84,6 @@ bindsym $mod+b exec $browser
 bindsym $mod+d exec $fileManager
 bindsym $mod+g exec $git
 bindsym $mod+e exec $editor
-# bindsym $mod+c exec code
 bindsym $mod+r exec $menu
 bindsym $mod+s exec $shutdown
 bindsym $mod+p exec /usr/lib/packettracer/packettracer.AppImage
