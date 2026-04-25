@@ -47,7 +47,12 @@
   };
 
 
-  programs.zsh.enable = true;
+  programs.starship.enable = true;
+  programs.zsh = {
+    enable = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+  };
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true; # fix some theming issues in sway

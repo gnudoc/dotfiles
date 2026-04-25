@@ -23,12 +23,9 @@ zstyle :compinstall filename '/home/nij/.zshrc'
 autoload -Uz compinit
 compinit
 
-# --- The arch packaged zsh plugins ---
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# --- The arch packaged zsh plugins are configured in configuration.nix ---
 
-# --- Initialise starship ---
-eval "$(starship init zsh)"
+# --- starship is automatically initialised on nix ---
 
 # --- Vterm Integration ---
 # After starship initialises
