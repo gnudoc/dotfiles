@@ -11,6 +11,7 @@
     ],
 
     "modules-center": [
+        "clock"
     ],
 
     "modules-right": [
@@ -42,6 +43,9 @@
     "sway/window": {
         "max-length": 40,
 	"icon": false
+    },
+    "clock": {
+        "format": "{:%H:%M}"
     },
     "wireplumber": {
         "format": "\udb81\udd7e {volume}%",
