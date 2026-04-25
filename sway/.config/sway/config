@@ -1,14 +1,14 @@
 
 # --- Output Configuration ---
 # Sway auto-configures monitors well, but here is my dell xps 9300's:
-output eDP-1 resolution 1920x1200 position 0,0 scale 1
+output eDP-1 resolution 1920x1080 position 0,0 scale 1
 
 # --- Variables ---
 # Mod4 is Super
 set $mod Mod4
 set $term emacsclient -c -e '(nij/vterm-new)' -a ""
 set $alt_term footclient
-set $browser chromium
+set $browser qutebrowser
 set $menu rofi -show combi -modes combi -combi-modes "window,drun,ssh"
 set $shutdown rofi -show p -modi p:rofi-power-menu
 set $fileManager emacsclient -c -e "(call-interactively 'dired)" -a ""
@@ -26,8 +26,8 @@ exec emacs --daemon
 exec foot --server
 exec nm-applet
 exec waybar -c ~/.config/waybar/config-sway.jsonc
-exec awww-daemon
-exec ~/.config/sway/scripts/swww-random ~/.local/share/wallpapers
+#exec awww-daemon
+#exec ~/.config/sway/scripts/swww-random ~/.local/share/wallpapers
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec swayidle -w \
     timeout 300 'swaylock -f -c 1a1b26' \
@@ -86,7 +86,7 @@ bindsym $mod+g exec $git
 bindsym $mod+e exec $editor
 bindsym $mod+r exec $menu
 bindsym $mod+s exec $shutdown
-bindsym $mod+p exec /usr/lib/packettracer/packettracer.AppImage
+#bindsym $mod+p exec /usr/lib/packettracer/packettracer.AppImage
 
 # 2. Window Management
 bindsym $mod+q kill
@@ -167,5 +167,5 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPrev exec playerctl previous
 
 # Screenshot (Grim + Slurp)
-bindsym Print exec grim -g "$(slurp -d)"
-bindsym Shift+Print exec grim -g "$(slurp)" - | tee "$HOME/Pictures/Screenshots/$(date +'%s_grim.png')"| wl-copy
+#bindsym Print exec grim -g "$(slurp -d)"
+#bindsym Shift+Print exec grim -g "$(slurp)" - | tee "$HOME/Pictures/Screenshots/$(date +'%s_grim.png')"| wl-copy
