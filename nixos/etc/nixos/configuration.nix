@@ -64,7 +64,7 @@
     wlr.enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     config = {
-      common.default = { "gtk" ];
+      common.default = [ "gtk" ];
       sway = {
         default = [ "gtk" ];
         "org.freedesktop.impl.portal.Screencast" = [ "wlr" ];
