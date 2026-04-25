@@ -2,7 +2,7 @@
 # --- Output Configuration ---
 # Sway auto-configures monitors well, but here is my dell xps 9300's:
 output eDP-1 resolution 1920x1080 position 0,0 scale 1
-output * bg ~/walls/langjisjor-iceland-w0-1920x1080.jpg
+output * bg ~/walls/langjisjor-iceland-w0-1920x1080.jpg fill
 
 # --- Variables ---
 # Mod4 is Super
