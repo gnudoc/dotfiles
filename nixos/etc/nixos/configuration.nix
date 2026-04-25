@@ -43,8 +43,11 @@
   users.users.nij = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.zsh;
   };
 
+
+  programs.zsh.enable = true;
   programs.sway = {
     enable = true;
     wrapperFeatures.gtk = true; # fix some theming issues in sway
@@ -64,6 +67,11 @@
     foot
     imv
     qutebrowser
+    keychain
+  ];
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
   ];
 
   # List services that you want to enable:
