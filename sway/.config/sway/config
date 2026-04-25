@@ -6,7 +6,7 @@ output eDP-1 resolution 1920x1080 position 0,0 scale 1
 # --- Variables ---
 # Mod4 is Super
 set $mod Mod4
-set $term emacsclient -c -e '(nij/vterm-new)' -a ""
+set $term emacsclient -c -e '(term)' -a ""
 set $alt_term footclient
 set $browser qutebrowser
 set $menu rofi -show combi -modes combi -combi-modes "window,drun,ssh"
