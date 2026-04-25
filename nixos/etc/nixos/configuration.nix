@@ -57,12 +57,15 @@
     enable = true;
     wrapperFeatures.gtk = true; # fix some theming issues in sway
   };
+  programs.nano = {
+    enable = true;
+    syntaxHighlight = true;
+  };
   programs.dconf.enable = true; # let sway/gtk apps store settings
 
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     vim
-    nano
     emacs
     git
     wget
