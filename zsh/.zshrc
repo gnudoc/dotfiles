@@ -52,7 +52,7 @@ else
 fi
 
 # --- SSH & Authentication ---
-eval $(keychain --eval --quiet id_ed25519 id_ed25519_backups id_ed25519_github)
+eval $(keychain --eval --quiet id_ed25519)
 
 # --- Aliases ---
 alias btc="bluetoothctl"
