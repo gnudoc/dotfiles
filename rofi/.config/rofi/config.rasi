@@ -3,4 +3,4 @@ configuration {
   combi-modi: "window,drun,ssh,keys,filebrowser,recursivebrowser";
   show: "combi";
 }
-@theme "/usr/share/rofi/themes/Monokai.rasi"
+@theme "Monokai"
