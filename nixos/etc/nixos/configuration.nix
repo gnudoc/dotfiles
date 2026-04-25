@@ -23,7 +23,6 @@
     useXkbConfig = true;
   };
 
-  services.xserver.enable = true;
   services.xserver.xkb = {
     layout = "gb";
     variant = "dvorak";
@@ -84,6 +83,7 @@
 
   # List services that you want to enable:
   services.openssh.enable = true;
+  services.displayManager.ly.enable = true;
 
   system.stateVersion = "25.11"; # DON'T CHANGE THIS!
 
