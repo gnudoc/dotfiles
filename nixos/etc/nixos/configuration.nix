@@ -45,7 +45,7 @@
     shell = pkgs.zsh;
   };
 
-
+  programs.nm-applet.enable = true;
   programs.starship.enable = true;
   programs.zsh = {
     enable = true;
