@@ -1,13 +1,12 @@
 
 # --- Output Configuration ---
-# Sway auto-configures monitors well, but here is my dell xps 9300's:
 output eDP-1 resolution 1920x1080 position 0,0 scale 1
 output * bg ~/walls/langjisjor-iceland-w0-1920x1080.jpg fill
 
 # --- Variables ---
 # Mod4 is Super
 set $mod Mod4
-set $term emacsclient -c -e '(term)' -a ""
+set $term emacsclient -c -e "(call-interactively 'term)" -a ""
 set $alt_term footclient
 set $browser qutebrowser
 set $menu rofi -show combi -modes combi -combi-modes "window,drun,ssh"
@@ -25,10 +24,8 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 # --- Idle & Session ---
 exec emacs --daemon
 exec foot --server
-exec nm-applet
+# exec nm-applet # changed to the NixOS way of bringing up nm-applet
 exec waybar -c ~/.config/waybar/config-sway.jsonc
-#exec awww-daemon
-#exec ~/.config/sway/scripts/swww-random ~/.local/share/wallpapers
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec swayidle -w \
     timeout 300 'swaylock -f -c 1a1b26' \
@@ -68,9 +65,7 @@ default_floating_border normal
 # 1.0 = opaque
 for_window [class=".*"] opacity 0.95
 for_window [app_id=".*"] opacity 0.95
-# ensure Rofi and Chrome are opaque if you prefer
 for_window [app_id="rofi"] opacity 1.0
-for_window [app_id="chromium"] opacity 0.99
 
 # Colors (Approximation of a Hyprland teal/green gradient)
 # Property      Border  BG      Text    Indicator ChildBorder
@@ -87,7 +82,6 @@ bindsym $mod+g exec $git
 bindsym $mod+e exec $editor
 bindsym $mod+r exec $menu
 bindsym $mod+s exec $shutdown
-#bindsym $mod+p exec /usr/lib/packettracer/packettracer.AppImage
 
 # 2. Window Management
 bindsym $mod+q kill
