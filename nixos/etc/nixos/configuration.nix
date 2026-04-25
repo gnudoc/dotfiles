@@ -39,7 +39,7 @@
 
   users.users.nij = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "audio" "input"];
     shell = pkgs.zsh;
   };
 
