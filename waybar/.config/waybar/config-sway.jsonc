@@ -70,12 +70,5 @@
         "format": "|",
 	"interval": "once",
 	"tooltip": false
-    },
-    "custom/backup": {
-        "exec": "~/.local/bin/backup-status-on-waybar.sh",
-        "return-type": "json",
-        "interval": 3600,
-        "format": "  {}",
-        "on-click": "footclient -e journalctl -u laptop-backup.service -f"
     }
 }
