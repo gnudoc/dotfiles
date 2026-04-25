@@ -45,7 +45,7 @@
     shell = pkgs.zsh;
   };
 
-  programs.nm-applet.enable = true;
+  #programs.nm-applet.enable = true; # put it in systemPackages for now
   programs.starship.enable = true;
   programs.zsh = {
     enable = true;
@@ -66,6 +66,7 @@
   environment.systemPackages = with pkgs; [
     vim
     emacs
+    networkmanagerapplet
     git
     wget
     btop
@@ -84,6 +85,21 @@
   # List services that you want to enable:
   services.openssh.enable = true;
   services.displayManager.ly.enable = true;
+
+  # in arch, this is a sway config exec line and an installed package
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
 
   system.stateVersion = "25.11"; # DON'T CHANGE THIS!
 

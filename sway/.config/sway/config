@@ -24,9 +24,9 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 # --- Idle & Session ---
 exec emacs --daemon
 exec foot --server
-# exec nm-applet # changed to the NixOS way of bringing up nm-applet
+exec nm-applet --indicator # reverted from the NixOS way of bringing up nm-applet for now
 exec waybar -c ~/.config/waybar/config-sway.jsonc
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec swayidle -w \
     timeout 300 'swaylock -f -c 1a1b26' \
     timeout 330 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
