@@ -26,6 +26,7 @@
   services.libinput.enable = true;
 
   security.rtkit.enable = true;
+  security.polkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -73,6 +74,9 @@
     grim
     slurp
     wl-clipboard
+    swaylock
+    swayidle
+    brightnessctl
   ];
 
   fonts.packages = with pkgs; [
