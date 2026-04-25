@@ -156,11 +156,6 @@ bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 bindsym XF86MonBrightnessUp exec brightnessctl s 5%+
 bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
 
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPause exec playerctl play-pause
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPrev exec playerctl previous
-
 # Screenshot (Grim + Slurp)
-#bindsym Print exec grim -g "$(slurp -d)"
-#bindsym Shift+Print exec grim -g "$(slurp)" - | tee "$HOME/Pictures/Screenshots/$(date +'%s_grim.png')"| wl-copy
+bindsym Print exec grim - | wl-copy
+bindsym Shift+Print exec mkdir -p $HOME/Pictures/Screenshots && grim -g "$(slurp -d)" - | tee "$HOME/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S_grim.png')" | wl-copy
