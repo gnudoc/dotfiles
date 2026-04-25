@@ -18,7 +18,7 @@
     useXkbConfig = true;
   };
 
-  services.xserver.xkb = {
+  services.xkb = {
     layout = "gb";
     variant = "dvorak";
     options = "ctrl:swapcaps,compose:ralt";
@@ -43,7 +43,7 @@
     shell = pkgs.zsh;
   };
 
-  #programs.nm-applet.enable = true; # put it in systemPackages for now
+  programs.nm-applet.enable = true;
   programs.starship.enable = true;
   programs.zsh = {
     enable = true;
@@ -59,11 +59,15 @@
     syntaxHighlight = true;
   };
   programs.dconf.enable = true; # let sway/gtk apps store settings
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   environment.systemPackages = with pkgs; [
     vim
     emacs
-    networkmanagerapplet
     git
     wget
     btop

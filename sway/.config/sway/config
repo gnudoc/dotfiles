@@ -25,7 +25,7 @@ set $editor emacsclient -c -a ""
 # --- Idle & Session ---
 exec emacs --daemon
 exec foot --server
-exec nm-applet --indicator # reverted from the NixOS way of bringing up nm-applet for now
+# exec nm-applet --indicator # reverted from the NixOS way of bringing up nm-applet for now
 exec waybar -c ~/.config/waybar/config-sway.jsonc
 # exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec swayidle -w \
