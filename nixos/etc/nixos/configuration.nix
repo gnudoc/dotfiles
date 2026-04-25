@@ -18,7 +18,7 @@
     useXkbConfig = true;
   };
 
-  services.xkb = {
+  services.xserver.xkb = {
     layout = "gb";
     variant = "dvorak";
     options = "ctrl:swapcaps,compose:ralt";
