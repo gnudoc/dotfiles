@@ -1,33 +1,31 @@
 
 # --- Output Configuration ---
 output eDP-1 resolution 1920x1080 position 0,0 scale 1
-output * bg ~/walls/langjisjor-iceland-w0-1920x1080.jpg fill
+output * bg ~/.config/sway/walls/langjisjor-iceland-w0-1920x1080.jpg fill
 
 # --- Variables ---
 # Mod4 is Super
 set $mod Mod4
-set $term emacsclient -c -e "(call-interactively 'term)" -a ""
-set $alt_term footclient
-set $browser qutebrowser
+#set $term emacsclient -c -e "(call-interactively 'term)" -a ""
+set $term footclient
+set $browser chromium
 set $menu rofi -show combi -modes combi -combi-modes "window,drun,ssh"
-set $shutdown rofi -show p -modi p:rofi-power-menu
-set $fileManager emacsclient -c -e "(call-interactively 'dired)" -a ""
-set $git emacsclient -c -e '(magit-status)' -a ""
-set $editor emacsclient -c -a ""
+#set $shutdown rofi -show p -modi p:rofi-power-menu
+#set $fileManager emacsclient -c -e "(call-interactively 'dired)" -a ""
+#set $git emacsclient -c -e '(magit-status)' -a ""
+#set $editor emacsclient -c -a ""
 
 # --- Environment & Systemd Integration ---
-# This fixes "Apps not opening" and "Waybar not showing"
-# Apparently not needed in nixos
-# exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP SSH_AUTH_SOCK
-# exec hash dbus-update-activation-environment 2>/dev/null && \
-#     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP SSH_AUTH_SOCK
+# Gemini thought this wasn't needed but it is, at least if sway is run from TTY
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP SSH_AUTH_SOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP SSH_AUTH_SOCK
 
 # --- Idle & Session ---
-exec emacs --daemon
+#exec emacs --daemon
 exec foot --server
-# exec nm-applet --indicator # reverted from the NixOS way of bringing up nm-applet for now
+exec nm-applet
 exec waybar -c ~/.config/waybar/config-sway.jsonc
-# exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec swayidle -w \
     timeout 300 'swaylock -f -c 1a1b26' \
     timeout 330 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
@@ -40,7 +38,7 @@ bindsym $mod+Escape exec swaylock -f -c 1a1b26
 input type:keyboard {
     xkb_layout gb
     xkb_variant dvorak
-    xkb_options ctrl:swapcaps,compose:ralt
+    xkb_options ctrl:swapcaps
 }
 
 input type:touchpad {
@@ -52,7 +50,7 @@ input type:touchpad {
 
 # --- Visuals & Transparency ---
 # Default font
-font pango:monospace 10
+font pango:Noto Sans 10
 
 # Gaps
 gaps inner 2
@@ -67,8 +65,9 @@ default_floating_border normal
 for_window [class=".*"] opacity 0.95
 for_window [app_id=".*"] opacity 0.95
 for_window [app_id="rofi"] opacity 1.0
+for_window [app_id="chromium"] opacity 0.99
 
-# Colors (Approximation of a Hyprland teal/green gradient)
+# Colors
 # Property      Border  BG      Text    Indicator ChildBorder
 client.focused  #33ccff #33ccff #000000 #33ccff   #33ccff
 
@@ -76,13 +75,12 @@ client.focused  #33ccff #33ccff #000000 #33ccff   #33ccff
 
 # 1. Application Launchers
 bindsym $mod+Return exec $term
-bindsym $mod+Shift+Return exec $alt_term
 bindsym $mod+b exec $browser
-bindsym $mod+d exec $fileManager
-bindsym $mod+g exec $git
-bindsym $mod+e exec $editor
+#bindsym $mod+d exec $fileManager
+#bindsym $mod+g exec $git
+#bindsym $mod+e exec $editor
 bindsym $mod+r exec $menu
-bindsym $mod+s exec $shutdown
+#bindsym $mod+s exec $shutdown
 
 # 2. Window Management
 bindsym $mod+q kill
@@ -158,5 +156,5 @@ bindsym XF86MonBrightnessUp exec brightnessctl s 5%+
 bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
 
 # Screenshot (Grim + Slurp)
-bindsym Print exec grim - | wl-copy
-bindsym Shift+Print exec mkdir -p $HOME/Pictures/Screenshots && grim -g "$(slurp -d)" - | tee "$HOME/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S_grim.png')" | wl-copy
+bindsym Print exec grim -g "$(slurp -d)"
+bindsym Shift+Print exec grim -g "$(slurp)" - | tee "$HOME/$(date +'%s_grim.png')" | wl-copy
